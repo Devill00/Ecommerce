@@ -60,7 +60,7 @@ exports.resetPasswordRequest = async (req, res) => {
     user.resetPasswordToken=token;
     await user.save();
 
-    const resetPageLink="http://localhost://3000/reset-password?token="+token+'&email='+email;
+    const resetPageLink="/reset-password?token="+token+'&email='+email;
     const subject="reset password for ecommerce"
     const html=`<p>click <a href='${resetPageLink}'>here</a> to reset your password</p>`
     if(email){

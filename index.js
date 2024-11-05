@@ -204,6 +204,6 @@ async function main() {
   console.log('database connected');
 }
 
-server.listen(8080, () => {
+server.listen(process.env.PORT, () => {
   console.log('server started');
 });
