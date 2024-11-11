@@ -79,8 +79,8 @@ server.use(cookieParser());
 server.use(
   session({
     secret: process.env.SESSION_KEY,
-    resave: false, // don't save session if unmodified
-    saveUninitialized: false, // don't create session until something stored
+    resave: false,
+    saveUninitialized: false,
   })
 );
 server.use(passport.authenticate('session'));
@@ -89,8 +89,7 @@ server.use(
     exposedHeaders: ['X-Total-Count'],
   })
 );
-server.use(express.json()); // to parse req.body
-
+server.use(express.json());
 server.use('/products', isAuth(), productsRouter.router);
 server.use('/categories', isAuth(), categoriesRouter.router);
 server.use('/brands', isAuth(), brandsRouter.router);
@@ -100,7 +99,7 @@ server.use('/cart', isAuth(), cartRouter.router);
 server.use('/orders', isAuth(), ordersRouter.router);
 
 
-// this line we add to make react router work in case of other routes doesnt match
+
 server.get('*', (req, res) =>
   res.sendFile(path.resolve('build', 'index.html'))
 );
@@ -132,7 +131,7 @@ passport.use(
             sanitizeUser(user),
             process.env.JWT_SECRET_KEY
           );
-          done(null, { id: user.id, role: user.role, token }); // this lines sends to serializer
+          done(null, { id: user.id, role: user.role, token }); 
         }
       );
     } catch (err) {
@@ -174,7 +173,6 @@ passport.deserializeUser(function (user, cb) {
 
 // Payments
 
-// This is your test secret API key.
 const stripe = require('stripe')(process.env.STRIPE_SERVER_KEY);
 
 server.post('/create-payment-intent', async (req, res) => {

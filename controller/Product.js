@@ -1,7 +1,7 @@
 const { Product } = require('../model/Product');
 
 exports.createProduct = async (req, res) => {
-  // this product we have to get from API body
+
   const product = new Product(req.body);
   product.discountPrice = Math.round(product.price*(1-product.discountPercentage/100))
   try {
